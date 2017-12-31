@@ -20,6 +20,16 @@ class LogForm extends Component {
     // put to dynamo table -- build out function later
   }
 
+  createRangeDropdown = (range) => {
+    return this.createRange(range[0], range[1]).map(num => {
+      return <option key={ num.toString() }
+              value={ num }
+              onChange={ this.handleChange }>
+              { num }</option>
+    })
+
+  }
+
   createRange = (first, last) => {
     let range = []
     let incr = 1
@@ -35,18 +45,12 @@ class LogForm extends Component {
     return range
   }
 
-  DropdownList = (props) => {
-    const first = props.first || 0
-    const last = props.last || 0
-
-    return (
-      <select>
-        {this.createRange(-50, 100).map(num => <option key={ num.toString() } value={ num } onChange={ this.handleChange }> { num }</option>)}
-      </select>
-    )
-  }
-
   render() {
+    const DropdownRange = (props) => {
+      console.log(props)
+      return this.createRangeDropdown(props.range)
+    }
+
     return(
       <form onSubmit={ this.handleSubmit }>
         <label>Type</label>
@@ -68,7 +72,7 @@ class LogForm extends Component {
 
         <label>Weight</label>
           <select value="0">
-            <DropdownList first={-50} last={100} />
+            <DropdownRange range={[-50, 100]}/>
           </select>
 
         <input type="submit" value="Submit" />
