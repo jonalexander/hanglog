@@ -76,12 +76,12 @@ class LogForm extends Component {
         </select>
 
         <label>Additional Weight</label>
-        <select name="weight" value="0" onChange={ this.handleChange }>
+        <select name="weight" value={ this.state.weight } onChange={ this.handleChange }>
           <DropdownRange range={[-50, 100]} options='add-weight'/>
         </select>
 
         <label>Body Weight</label>
-        <input name="bodyweight" type="text" value="lbs" onChange={ this.handleChange } />
+        <input name="bodyweight" type="text" value={ this.state.bodyweight } onChange={ this.handleChange } />
 
         <input type="submit" value="Submit" />
       </form>
