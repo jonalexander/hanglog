@@ -7,25 +7,33 @@ class LogForm extends Component {
       type: 'hang',   // hang || nohang
       method: 'max',  // max || repeater
       hold: '18mm Edge Beastmaker',
-      weight: null,
-      bodyweight: null,
+      weight: 0,
+      bodyweight: 0,
     }
   }
 
   handleChange = (event) => {
     // this.setState({ field: value })
+    console.log(event.target.name, event.target.value)
+    this.setState({[event.target.name]: event.target.value})
+    console.log(this.state)
   }
 
   handleSubmit = (event) => {
+    event.preventDefault()
     // put to dynamo table -- build out function later
   }
 
-  createRangeDropdown = (range) => {
+  createRangeDropdown = (props) => {
+    let { range, options } = props
+    console.log('options', options)
+
     return this.createRange(range[0], range[1]).map(num => {
-      return <option key={ num.toString() }
-              value={ num }
-              onChange={ this.handleChange }>
-              { num }</option>
+      return <option onChange={ this.handleChange }
+                     key={ num.toString() }
+                     value={ num }>
+                     { num }
+                     </option>
     })
 
   }
@@ -46,34 +54,34 @@ class LogForm extends Component {
   }
 
   render() {
-    const DropdownRange = (props) => {
-      console.log(props)
-      return this.createRangeDropdown(props.range)
-    }
+    const DropdownRange = (props) => this.createRangeDropdown(props)
 
     return(
       <form onSubmit={ this.handleSubmit }>
         <label>Type</label>
-        <select value={ this.state.type } onChange={ this.handleChange }>
+        <select name="type" value={ this.state.type } onChange={ this.handleChange }>
           <option value="hang">Hang</option>
           <option value="nohang">No-Hang</option>
         </select>
 
         <label>Method</label>
-        <select value={ this.state.method } onChange={ this.handleChange }>
+        <select name="method" value={ this.state.method } onChange={ this.handleChange }>
           <option value="max">Max</option>
           <option value="repeater">Repeater</option>
         </select>
 
         <label>Hold</label>
-        <select value={ this.state.hold } onChange={ this.handleChange }>
+        <select name="hold" value={ this.state.hold } onChange={ this.handleChange }>
           <option value="18cmedgebeastmaker">18cm Edge Beastmaker</option>
         </select>
 
-        <label>Weight</label>
-          <select value="0">
-            <DropdownRange range={[-50, 100]}/>
-          </select>
+        <label>Additional Weight</label>
+        <select name="weight" value="0" onChange={ this.handleChange }>
+          <DropdownRange range={[-50, 100]} options='add-weight'/>
+        </select>
+
+        <label>Body Weight</label>
+        <input name="bodyweight" type="text" value="lbs" onChange={ this.handleChange } />
 
         <input type="submit" value="Submit" />
       </form>
