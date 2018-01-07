@@ -17,3 +17,7 @@
 .App-title {
   font-size: 3em;
 }
+
+select, input, form {
+  margin: 1em;
+}

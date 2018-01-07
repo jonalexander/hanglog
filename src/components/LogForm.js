@@ -13,15 +13,22 @@ class LogForm extends Component {
   }
 
   handleChange = (event) => {
-    // this.setState({ field: value })
-    console.log(event.target.name, event.target.value)
-    this.setState({[event.target.name]: event.target.value})
-    console.log(this.state)
+    console.log(event.target.value)
+    this.setState({ [event.target.name]: event.target.value })
   }
 
   handleSubmit = (event) => {
     event.preventDefault()
+    console.log('submit event, state=>', this.state)
+
+    let data = this.sanitize(this.state)
+    console.log('data', data)
+
     // put to dynamo table -- build out function later
+  }
+
+  sanitize = rawstate => {
+    
   }
 
   createRangeDropdown = (props) => {
@@ -72,7 +79,7 @@ class LogForm extends Component {
 
         <label>Hold</label>
         <select name="hold" value={ this.state.hold } onChange={ this.handleChange }>
-          <option value="18cmedgebeastmaker">18cm Edge Beastmaker</option>
+          <option value="18mm_crimp_BM">18mm BM</option>
         </select>
 
         <label>Additional Weight</label>
