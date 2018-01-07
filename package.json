@@ -5,6 +5,7 @@
   "dependencies": {
     "amazon-cognito-identity-js": "^1.29.0",
     "amazon-cognito-js": "^1.1.0",
+    "aws-api-gateway-client": "^0.2.10",
     "aws-sdk": "^2.176.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",

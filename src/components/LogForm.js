@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import apiGatewayClient from 'aws-api-gateway-client'
 
 class LogForm extends Component {
   constructor(props) {
@@ -28,7 +29,7 @@ class LogForm extends Component {
   }
 
   sanitize = rawstate => {
-    
+
   }
 
   createRangeDropdown = (props) => {
@@ -61,6 +62,7 @@ class LogForm extends Component {
   }
 
   render() {
+    console.log(apiGatewayClient)
     const DropdownRange = (props) => this.createRangeDropdown(props)
 
     return(
